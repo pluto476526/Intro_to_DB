@@ -1,21 +1,24 @@
 import mysql.connector
+from mysql.connector import Error
 
 def createDB():
+    conn = None
+    miCursor = None
     try :
         conn = mysql.connector.connect(
             host = "localhost",
             user = "trinity985",
-            password = "37022657",
-            database = "alx_book_store"
+            password = "37022657"
         )
 
-        miCursor = conn.cursor()
-        sql = "CREATE DATABASE IF NOT EXISTS alx_book_store"
+        if conn.is_connected() :
+            miCursor = conn.cursor()
+            sql = "CREATE DATABASE IF NOT EXISTS alx_book_store"
 
-        if miCursor.execute(sql) :
+            miCursor.execute(sql) :
             print("Database 'alx_book_store' created succesfully!")
 
-        conn.commit()
+            conn.commit()
 
     except Error as e :
         print("Did no connect. {e}")
@@ -26,3 +29,5 @@ def createDB():
 
         if conn :
             conn.close()
+
+createDB()
