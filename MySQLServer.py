@@ -20,6 +20,9 @@ def createDB():
 
             conn.commit()
 
+    except mysql.connector.Error as e :
+        print(f"Error: {e}")
+
     except Error as e :
         print("Did no connect. {e}")
 
